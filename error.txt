@@ -1,0 +1,25 @@
+const express = require("express");
+const path = require("path");
+
+const { open } = require("sqlite");
+const sqlite3 = require("sqlite3");
+
+const app = express();
+
+const path1 = path.join(__dirname, "cricketTeam.db");
+let db = null;
+const instant1 = async () => {
+  try {
+    db = await open({
+      filename: path1,
+      driver: sqlite3.Database,
+    });
+    app.listen(3000, () => {
+      console.log("sucess");
+    });
+  } catch (e) {
+    console.log(`error ${e.message}`);
+    process.exit(1);
+  }
+};
+instant1();
